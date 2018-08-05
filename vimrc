@@ -25,7 +25,7 @@ let g:winManagerWidth=35
 "let Tlist_Show_One_File = 1
 "let Tlist_Exit_OnlyWindow =  1
 "let Tlist_Use_Left_Window = 1
-""F7 NERDTree 
+""F73NERDTree 
 map <F3> :NERDTreeToggle<CR>
 imap <F3> <ESC>:NERDTreeToggle<CR>
 map <F8> :WMToggle<CR>
