@@ -25,7 +25,7 @@ let g:winManagerWidth=35
 "let Tlist_Show_One_File = 1
 "let Tlist_Exit_OnlyWindow =  1
 "let Tlist_Use_Left_Window = 1
-""F73NERDTree 
+""F3NERDTree 
 map <F3> :NERDTreeToggle<CR>
 imap <F3> <ESC>:NERDTreeToggle<CR>
 map <F8> :WMToggle<CR>
@@ -68,3 +68,33 @@ function QuoteDelim(char)
 		return a:char.a:char."\<Esc>i"
 	endif
 endf
+
+"run script by F6"
+map <F6> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+	exec "w"
+if &filetype == 'c'
+	exec "!g++ % -o %<"
+	exec "!time ./%<"
+elseif &filetype == 'cpp'
+	exec "!g++ % -o %<"
+	exec "!time ./%<"
+elseif &filetype == 'java'
+	exec "!javac %"
+	exec "!time java %<"
+elseif &filetype == 'sh'
+	:!time bash %
+elseif &filetype == 'python'
+	exec "!time python %"
+elseif &filetype == 'html'
+	exec "!firefox % &"
+elseif &filetype == 'go'
+	"        exec "!go build %<"
+	exec "!time go run %"
+elseif &filetype == 'mkd'
+	exec "!~/.vim/markdown.pl % > %.html &"
+	exec "!firefox %.html &"
+endif
+endfunc
+
+
