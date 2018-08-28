@@ -48,6 +48,7 @@ let g:neotags_tags_filename = "tags"
 
 " vim go 
 " let g:go_fmt_autosave = 0
+
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
@@ -101,7 +102,7 @@ augroup go
   autocmd!
 "
 "" Show by default 4 spaces for a tab
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufRead *.go,*.php,*.py setlocal noexpandtab tabstop=4 shiftwidth=4
 
 " :GoBuild and :GoTestCompile
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
@@ -134,6 +135,10 @@ autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0,'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0,'vsplit')
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0,'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0,'tabe')
+" check fix at save go
+autocmd BufWritePost *.go :GoMetaLinter
+
+
 	augroup END
 
 " build_go_files is a custom function that builds or compiles the test file.
@@ -152,9 +157,14 @@ function! s:build_go_files()
 	endif
 endfunction
 
-
 " other setting
-let g:tagbar_width = 30
+""""""""""""""""""""""""""""""
+" scrooloose/nerdtree setting
+" """"""""""""""""""""""""""""""
+let NERDTreeWinPos='left'
+let NERDTreeWinSize=22
+
+let g:tagbar_width = 28
 let g:tagbar_autopreview = 1
 let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
 "set g:winManagerWindowLayout='FileExplorer|TagList|BufExplorer'
@@ -174,6 +184,7 @@ set ruler
 colorscheme desert
 let g:winManagerWindowLayout='FileExplorer|TagList|BufExplorer'
 let g:winManagerWidth=35
+
 
 ""F3 NERDTree 
 map <F3> :NERDTreeToggle<CR>
@@ -206,9 +217,7 @@ func! CompileRunGcc()
 		"        exec "!go build %<"
 		exec "!time go run %"
 	elseif &filetype == 'mkd'
-		exec "!~/.vim/markdown.pl
-		% > %.html &"
-		exec "!firefox %.html
-		&"
+		exec "!~/.vim/markdown.pl% > %.html &"
+		exec "!firefox %.html&"
 	endif
 endfunc
