@@ -175,11 +175,6 @@ let g:winManagerWidth=35
 ""let Tlist_Exit_OnlyWindow =  1
 "let Tlist_Use_Left_Window = 1
 "
-highlight Function cterm=bold,underline ctermbg=red ctermfg=green
-highlight TabLine term=underline cterm=bold ctermfg=9 ctermbg=4
-highlight TabLineSel term=bold cterm=bold ctermbg=Red ctermfg=yellow
-highlight Pmenu ctermbg=darkred
-highlight PmenuSel ctermbg=red ctermfg=yellow
 set ruler
 colorscheme desert
 let g:winManagerWindowLayout='FileExplorer|TagList|BufExplorer'
