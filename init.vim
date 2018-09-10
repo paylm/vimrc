@@ -43,9 +43,6 @@ set completeopt=menu,menuone    " Show popup menu, even if there is one entry
 set pumheight=10                " Completion window max size
 set mouse=a
 
-let g:neotags_ctags_cmd = "ctags"
-let g:neotags_tags_filename = "tags"
-
 " vim go 
 " let g:go_fmt_autosave = 0
 
@@ -166,15 +163,7 @@ let NERDTreeWinSize=22
 
 let g:tagbar_width = 28
 let g:tagbar_autopreview = 1
-let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
-"set g:winManagerWindowLayout='FileExplorer|TagList|BufExplorer'
-let g:winManagerWidth=35
-"let Tlist_Auto_Open=1
-""let Tlist_Ctags_Cmd = '/usr/bin/ctags'
-"let Tlist_Show_One_File = 1
-""let Tlist_Exit_OnlyWindow =  1
-"let Tlist_Use_Left_Window = 1
-"
+
 set ruler
 colorscheme desert
 let g:winManagerWindowLayout='FileExplorer|TagList|BufExplorer'
