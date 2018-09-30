@@ -1,27 +1,27 @@
-" basic
-syntax on
-set number
-"set colorcolumn=100
+" basic                          
+syntax on                                    
+set number                                  
+"set colorcolumn=100                             
 "set mouse=a
-
-" vim-plug
+                       
+" vim-plug             
 call plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree'
-Plug 'fatih/vim-go'
-Plug 'mdempsky/gocode'
+Plug 'fatih/vim-go'       
+Plug 'mdempsky/gocode' 
 Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'        
+Plug 'vim-airline/vim-airline-themes'  
 Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'zchee/deoplete-jedi'
-Plug 'kien/ctrlp.vim'
-Plug 'edkolev/tmuxline.vim'
+Plug 'zchee/deoplete-jedi'                                                                                                                            
+Plug 'kien/ctrlp.vim'        
+Plug 'edkolev/tmuxline.vim'                                                                                                                   [37/313]
 call plug#end()
 
 filetype plugin indent on
-filetype plugin on
+filetype plugin on                                                                                                                                    
 
 " gb setting
 let g:go_fmt_command = "goimports"
@@ -32,7 +32,7 @@ set background=dark
 set termguicolors
 let g:gruvbox_italic=1
 colorscheme gruvbox
-
+                                                                                                                                                      
 " airline
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
@@ -52,16 +52,16 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=22
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif                                                 
 map <C-n> :NERDTreeToggle<CR>
 
 
 "deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']                                                                    
 let g:deoplete#sources#go#source_importer = 1
-let g:deoplete#sources#go#auto_goos = 1 
-let g:deoplete#sources#go#pointer = 1 
+let g:deoplete#sources#go#auto_goos = 1
+let g:deoplete#sources#go#pointer = 1
 
 " deoplete-go settings
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
@@ -69,7 +69,7 @@ let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 augroup go
   autocmd!
 "" Show by default 4 spaces for a tab
-autocmd BufNewFile,BufRead *.go,*.php,*.py setlocal noexpandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufRead *.go,*.php,*.py setlocal noexpandtab tabstop=4 shiftwidth=4                                                                
 
 " check fix at save go
 autocmd BufWritePost *.go :GoMetaLinter
