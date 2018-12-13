@@ -66,6 +66,9 @@ let g:deoplete#sources#go#pointer = 1
 " deoplete-go settings
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 
+"go linter setting disable quickfix warning dump to
+let g:go_metalinter_enabled = ['vet']
+
 augroup go
   autocmd!
 "" Show by default 4 spaces for a tab
