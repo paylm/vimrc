@@ -17,7 +17,8 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'zchee/deoplete-jedi'                                                                                                                            
 Plug 'kien/ctrlp.vim'        
-Plug 'edkolev/tmuxline.vim'                                                                                                                   [37/313]
+Plug 'edkolev/tmuxline.vim'  
+Plug 'sebdah/vim-delve'
 call plug#end()
 
 filetype plugin indent on
@@ -95,3 +96,12 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+
+"debug tool
+map <F6> :DlvDebug <CR>
+" ctrl+F6 => dlvTest
+map <F30> :DlvTest <CR>
+"<F7> => DlvToggleBreakpoint
+map <F7> :DlvToggleBreakpoint <CR>
+"ctrl +F7  => DlvToggleTracepoint 
+map <F33> :DlvToggleTracepoint <CR>
