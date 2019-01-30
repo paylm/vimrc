@@ -79,9 +79,14 @@ autocmd BufNewFile,BufRead *.go,*.php,*.py setlocal noexpandtab tabstop=4 shiftw
 autocmd BufWritePost *.go :GoMetaLinter
 
 augroup END
+'map GoTest
+map <leader>t :GoTest <CR>
 
 map ss :w<CR>
 map se :wq!<CR>
+
+"ack
+map <C-l> :Ack!<Space><CR> 
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
