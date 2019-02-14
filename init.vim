@@ -19,6 +19,7 @@ Plug 'zchee/deoplete-jedi'
 Plug 'kien/ctrlp.vim'        
 Plug 'edkolev/tmuxline.vim'  
 Plug 'sebdah/vim-delve'
+Plug 'mileszs/ack.vim'
 call plug#end()
 
 filetype plugin indent on
