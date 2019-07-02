@@ -18,6 +18,9 @@ highlight Pmenu ctermbg=darkred
 highlight PmenuSel ctermbg=red ctermfg=yellow
 set ruler
 colorscheme desert
+if &diff
+    colorscheme evening
+endif
 let g:winManagerWindowLayout='FileExplorer|TagList|BufExplorer'
 let g:winManagerWidth=35
 "let Tlist_Auto_Open=1
