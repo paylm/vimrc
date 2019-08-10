@@ -111,3 +111,10 @@ map <F30> :DlvTest <CR>
 map <F7> :DlvToggleBreakpoint <CR>
 "ctrl +F7  => DlvToggleTracepoint 
 map <F33> :DlvToggleTracepoint <CR>
+
+"auto complete Symbols
+inoremap ' ''<ESC>i                                                                                                                                                     
+inoremap " ""<ESC>i                                                                                                                                                     
+inoremap ( ()<ESC>i                                                                                                                                                     
+inoremap [ []<ESC>i                                                                                                                                                     
+inoremap { {<CR>}<ESC>O 
