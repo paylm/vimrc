@@ -1,37 +1,7 @@
 ### debain 10 安装纪录
 
 ## 1. 镜像下载: debian 10 dvd 完遬镜像 4G
-    添加/etc/apt/source.list
-    ```
-    
-# deb cdrom:[Debian GNU/Linux 10.7.0 _Buster_ - Official amd64 DVD Binary-1 20201205-11:17]/ buster contrib main
-
-# deb cdrom:[Debian GNU/Linux 10.7.0 _Buster_ - Official amd64 DVD Binary-1 20201205-11:17]/ buster contrib
-deb http://mirrors.163.com/debian/ buster main contrib non-free
-deb-src http://mirrors.163.com/debian/ buster main contrib non-free
-
-# Line commented out by installer because it failed to verify:
- deb http://security.debian.org/debian-security buster/updates main contrib
- deb-src http://security.debian.org/debian-security buster/updates main contrib
-# deb http://security.debian.org/debian-security buster/updates main contrib
-# deb-src http://security.debian.org/debian-security buster/updates main contrib
-# Line commented out by installer because it failed to verify:
-# deb-src http://security.debian.org/debian-security buster/updates main contrib
-
-# buster-updates, previously known as 'volatile'
-# A network mirror was not selected during install.  The following entries
-# are provided as examples, but you should amend them as appropriate
-# for your mirror of choice.
-deb http://mirrors.163.com/debian/ buster-updates main contrib non-free
-deb-src http://mirrors.163.com/debian/ buster-updates main contrib non-free
-#
-# deb http://deb.debian.org/debian/ buster-updates main contrib
-# deb-src http://deb.debian.org/debian/ buster-updates main contrib
-deb http://ftp.cn.debian.org/debian/ buster-backports main contrib non-free
-# deb-src http://deb.debian.org/debian buster-backports main
-deb http://dl.google.com/linux/deb/ stable main
-
-    ```
++ 添加/etc/apt/source.list
 
 ## 2. 处理显卡驱动lscpi -vv | grep -i VGA 
 
