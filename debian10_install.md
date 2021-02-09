@@ -71,3 +71,64 @@ Select "Reboot".
 ```
 
 完成成重启系统，网卡和显示正常。。。
+
+## 无法播放声音的办法
++ 查看网卡驱动是否正常
+```
+➜  ~ lspci -vv -s 00:1f.3
+00:1f.3 Audio device: Intel Corporation Device 02c8 (prog-if 80)
+        Subsystem: Lenovo Device 22af
+        Control: I/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+        Latency: 64
+        Interrupt: pin A routed to IRQ 162
+        Region 0: Memory at ef73c000 (64-bit, non-prefetchable) [size=16K]
+        Region 4: Memory at eea00000 (64-bit, non-prefetchable) [size=1M]
+        Capabilities: <access denied>
+        Kernel driver in use: sof-audio-pci   // 查看到此时系统使用的驱动与硬件驱动不一样，需要调整治
+        Kernel modules: snd_hda_intel, snd_sof_pci
+
+```
++ 处理方法
+``
+lsmod | grep snd_hda_intel
+snd_hda_intel          57344  6
+snd_intel_dspcfg       24576  3 snd_hda_intel,snd_sof_pci,snd_sof_intel_hda_common
+snd_hda_codec         163840  5 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec_realtek,snd_soc_hdac_hda                                                                
+snd_hda_core          106496  9 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hda_intel,snd_hda_ext_core,snd_hda_codec,snd_hda_codec_realtek,snd_sof_intel_hda_common,snd_soc_hdac_hda,snd_sof_intel_hda
+snd_pcm               131072  9 snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec,snd_sof,snd_sof_intel_hda_common,snd_compress,snd_soc_core,snd_hda_core                                       
+snd                   106496  22 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hwdep,snd_hda_intel,snd_hda_codec,snd_hda_codec_realtek,snd_timer,snd_compress,thinkpad_acpi,snd_soc_core,snd_pcm
+
+```
+内核已加载此模块，只有没关联硬件上
+需要改grub, 优先使用snd_hda_intel
+编辑Linux Kernel启动项：这里以使用人数最多的Grub2为例子：
+在/etc/default/grub里编辑，在GRUB_CMDLINE_LINUX_DEFAULT加上
+
+``` 
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT="quiet snd_hda_intel.dmic_detect=0"
+GRUB_CMDLINE_LINUX=""
+
+```
+snd_hda_intel.dmic_detect=0
+然后保存退出，重新生成Grub Config：（注意提权）
+grub-mkconfig -o /boot/grub/grub.cfg
+ 重启一下，就能看到Intel的声卡控制芯片了～
+ 此时查看声卡驱动
+ ```
+ ➜  ~ lspci -vv -s 00:1f.3
+00:1f.3 Audio device: Intel Corporation Device 02c8 (prog-if 80)
+        Subsystem: Lenovo Device 22af
+        Control: I/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+                                                                                
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-                                                                                 
+        Latency: 64
+        Interrupt: pin A routed to IRQ 162
+        Region 0: Memory at ef73c000 (64-bit, non-prefetchable) [size=16K]
+        Region 4: Memory at eea00000 (64-bit, non-prefetchable) [size=1M]
+        Capabilities: <access denied>
+        Kernel driver in use: snd_hda_intel
+        Kernel modules: snd_hda_intel, snd_sof_pci
+ ```
